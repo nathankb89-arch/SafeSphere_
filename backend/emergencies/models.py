@@ -1,5 +1,5 @@
+from django.conf import settings
 from django.db import models
-from account.models import CustomUser
 from organizations.models import Organization
 from django.utils import timezone
 
@@ -35,8 +35,8 @@ class Emergency(models.Model):
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='reported')
     priority = models.CharField(max_length=20, choices=PRIORITY_CHOICES, default='medium')
     
-    reported_by = models.ForeignKey(CustomUser, on_delete=models.SET_NULL, null=True, related_name='emergencies_reported')
-    assigned_to = models.ForeignKey(CustomUser, on_delete=models.SET_NULL, null=True, blank=True, related_name='emergencies_assigned')
+    reported_by = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, null=True, related_name='emergencies_reported')
+    assigned_to = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, null=True, blank=True, related_name='emergencies_assigned')
     organization = models.ForeignKey(Organization, on_delete=models.CASCADE, related_name='emergencies', null=True, blank=True)
     
     location = models.CharField(max_length=500)
@@ -71,7 +71,7 @@ class Emergency(models.Model):
 class EmergencyResponse(models.Model):
     """Track responses to emergencies"""
     emergency = models.ForeignKey(Emergency, on_delete=models.CASCADE, related_name='responses')
-    volunteer = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='emergency_responses')
+    volunteer = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='emergency_responses')
     status = models.CharField(max_length=20, choices=(('accepted', 'Accepted'), ('rejected', 'Rejected'), ('pending', 'Pending')), default='pending')
     response_time = models.DateTimeField(auto_now_add=True)
     arrival_time = models.DateTimeField(blank=True, null=True)
