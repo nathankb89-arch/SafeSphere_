@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'notifications',
     'organizations',
     'reports',
+    'resources',
     'volunteers',
 ]
 
@@ -159,4 +160,22 @@ REST_FRAMEWORK = {
 
     )
 
+}
+
+# Custom User Model
+AUTH_USER_MODEL = 'account.CustomUser'
+
+# CORS Settings
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:3000",
+    "http://127.0.0.1:3000",
+    "http://localhost:5173",
+]
+
+# JWT Settings
+from datetime import timedelta
+
+SIMPLE_JWT = {
+    'ACCESS_TOKEN_LIFETIME': timedelta(hours=1),
+    'REFRESH_TOKEN_LIFETIME': timedelta(days=7),
 }

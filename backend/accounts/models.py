@@ -1,3 +1,4 @@
 from django.db import models
 
-# Create your models here.
+# Using CustomUser from account app instead
+# This app is for additional account-related models if needed
