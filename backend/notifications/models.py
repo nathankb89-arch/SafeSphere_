@@ -1,5 +1,5 @@
+from django.conf import settings
 from django.db import models
-from account.models import CustomUser
 
 
 class Notification(models.Model):
@@ -12,7 +12,7 @@ class Notification(models.Model):
         ('system', 'System Message'),
     )
     
-    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='notifications')
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='notifications')
     notification_type = models.CharField(max_length=50, choices=NOTIFICATION_TYPES)
     title = models.CharField(max_length=255)
     message = models.TextField()
@@ -44,7 +44,7 @@ class Notification(models.Model):
 
 class NotificationPreference(models.Model):
     """User notification preferences"""
-    user = models.OneToOneField(CustomUser, on_delete=models.CASCADE, related_name='notification_preferences')
+    user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='notification_preferences')
     
     emergency_alerts = models.BooleanField(default=True)
     task_notifications = models.BooleanField(default=True)

@@ -1,5 +1,5 @@
+from django.conf import settings
 from django.db import models
-from account.models import CustomUser
 
 
 class Organization(models.Model):
@@ -23,7 +23,7 @@ class Organization(models.Model):
     state = models.CharField(max_length=100)
     postal_code = models.CharField(max_length=20)
     
-    admin = models.ForeignKey(CustomUser, on_delete=models.SET_NULL, null=True, related_name='managed_organizations')
+    admin = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, null=True, related_name='managed_organizations')
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='active')
     
     established_date = models.DateField()
@@ -53,7 +53,7 @@ class OrganizationMember(models.Model):
     )
     
     organization = models.ForeignKey(Organization, on_delete=models.CASCADE, related_name='members')
-    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='organization_memberships')
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='organization_memberships')
     role = models.CharField(max_length=20, choices=ROLE_CHOICES)
     joined_at = models.DateTimeField(auto_now_add=True)
     

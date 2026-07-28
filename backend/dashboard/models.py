@@ -1,12 +1,12 @@
+from django.conf import settings
 from django.db import models
-from account.models import CustomUser
 from django.db.models import Sum, Count
 from django.utils import timezone
 
 
 class Dashboard(models.Model):
     """Dashboard statistics and summary"""
-    user = models.OneToOneField(CustomUser, on_delete=models.CASCADE, related_name='dashboard')
+    user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='dashboard')
     total_emergencies_handled = models.IntegerField(default=0)
     total_volunteers = models.IntegerField(default=0)
     active_organizations = models.IntegerField(default=0)
