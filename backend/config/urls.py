@@ -16,30 +16,8 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from django.conf import settings
-from django.conf.urls.static import static
 
 urlpatterns = [
-    path("admin/", admin.site.urls),
-    
-    # API Routes
-    path("api/account/", include("account.urls")),
-    path("api/emergencies/", include("emergencies.urls")),
-    path("api/organizations/", include("organizations.urls")),
-    path("api/volunteers/", include("volunteers.urls")),
-    path("api/dashboard/", include("dashboard.urls")),
-    path("api/notifications/", include("notifications.urls")),
-    path("api/reports/", include("reports.urls")),
-    path("api/resources/", include("resources.urls")),
+    path('admin/', admin.site.urls),
+    path('api/auth/', include('accounts.urls')),
 ]
-
-if settings.DEBUG:
-    urlpatterns += static(
-        settings.MEDIA_URL,
-        document_root=settings.MEDIA_ROOT
-    )
-
-    urlpatterns += static(
-        settings.STATIC_URL,
-        document_root=settings.STATIC_ROOT
-    )
