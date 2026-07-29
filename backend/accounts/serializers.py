@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from django.contrib.auth.password_validation import validate_password
-from .models import User
+from .models import CustomUser
 
 
 class RegisterSerializer(serializers.ModelSerializer):
@@ -8,7 +8,7 @@ class RegisterSerializer(serializers.ModelSerializer):
     password_confirm = serializers.CharField(write_only=True)
 
     class Meta:
-        model = User
+        model = CustomUser
         fields = ['id', 'username', 'email', 'password', 'password_confirm',
                   'role', 'phone_number', 'location']
 
@@ -20,7 +20,7 @@ class RegisterSerializer(serializers.ModelSerializer):
     def create(self, validated_data):
         validated_data.pop('password_confirm')
         password = validated_data.pop('password')
-        user = User(**validated_data)
+        user = CustomUser(**validated_data)
         user.set_password(password)   # hashes the password — never store plain text
         user.save()
         return user
@@ -28,7 +28,7 @@ class RegisterSerializer(serializers.ModelSerializer):
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
-        model = User
+        model = CustomUser
         fields = ['id', 'username', 'email', 'role', 'phone_number',
                   'location', 'is_verified', 'created_at']
         read_only_fields = ['id', 'is_verified', 'created_at']

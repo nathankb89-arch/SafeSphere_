@@ -74,7 +74,7 @@ DATABASES = {
 }
 
 # --- Custom user model (defined in Step 3) ---
-AUTH_USER_MODEL = 'accounts.User'
+AUTH_USER_MODEL = 'accounts.CustomUser'
 
 # --- DRF + JWT ---
 REST_FRAMEWORK = {

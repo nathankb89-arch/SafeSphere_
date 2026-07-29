@@ -1,5 +1,5 @@
 from django.db import models
-from accounts.models import CustomUser
+from django.conf import settings
 from organizations.models import Organization
 
 
@@ -18,7 +18,11 @@ class Volunteer(models.Model):
         ('flexible', 'Flexible'),
     )
     
-    user = models.OneToOneField(CustomUser, on_delete=models.CASCADE, related_name='volunteer_profile')
+    user = models.OneToOneField(
+    settings.AUTH_USER_MODEL,
+    on_delete=models.CASCADE,
+    related_name='volunteer_profile'
+    )
     organization = models.ForeignKey(Organization, on_delete=models.SET_NULL, null=True, blank=True, related_name='volunteers')
     
     experience_level = models.CharField(max_length=20, choices=EXPERIENCE_LEVELS, default='beginner')
@@ -58,7 +62,11 @@ class Volunteer(models.Model):
 class VolunteerRating(models.Model):
     """Ratings and reviews for volunteers"""
     volunteer = models.ForeignKey(Volunteer, on_delete=models.CASCADE, related_name='ratings')
-    rater = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
+    user = models.OneToOneField(
+    settings.AUTH_USER_MODEL,
+    on_delete=models.CASCADE,
+    related_name='volunteer_profile'
+)
     rating = models.IntegerField(choices=[(i, i) for i in range(1, 6)])
     review = models.TextField(blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
