@@ -14,15 +14,15 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
-        migrations.AlterUniqueTogether(
-            name='volunteerrating',
-            unique_together={('volunteer', 'user')},
-        ),
         migrations.AddField(
             model_name='volunteerrating',
             name='user',
-            field=models.OneToOneField(default=django.utils.timezone.now, on_delete=django.db.models.deletion.CASCADE, related_name='volunteer_rating', to=settings.AUTH_USER_MODEL),
+            field=models.OneToOneField(default=None, null=True, blank=True, on_delete=django.db.models.deletion.CASCADE, related_name='volunteer_rating', to=settings.AUTH_USER_MODEL),
             preserve_default=False,
+        ),
+        migrations.AlterUniqueTogether(
+            name='volunteerrating',
+            unique_together={('volunteer', 'user')},
         ),
         migrations.RemoveField(
             model_name='volunteerrating',

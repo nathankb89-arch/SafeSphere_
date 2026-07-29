@@ -65,7 +65,10 @@ class VolunteerRating(models.Model):
     user = models.OneToOneField(
         settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE,
-        related_name='volunteer_rating'
+        related_name='volunteer_rating',
+        default=None,
+        null=False,
+        blank=False
     )
     rating = models.IntegerField(choices=[(i, i) for i in range(1, 6)])
     review = models.TextField(blank=True, null=True)
