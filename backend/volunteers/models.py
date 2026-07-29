@@ -63,16 +63,16 @@ class VolunteerRating(models.Model):
     """Ratings and reviews for volunteers"""
     volunteer = models.ForeignKey(Volunteer, on_delete=models.CASCADE, related_name='ratings')
     user = models.OneToOneField(
-    settings.AUTH_USER_MODEL,
-    on_delete=models.CASCADE,
-    related_name='volunteer_profile'
-)
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE,
+        related_name='volunteer_rating'
+    )
     rating = models.IntegerField(choices=[(i, i) for i in range(1, 6)])
     review = models.TextField(blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     
     class Meta:
-        unique_together = ('volunteer', 'rater')
+        unique_together = ('volunteer', 'user')
         ordering = ['-created_at']
     
     def __str__(self):

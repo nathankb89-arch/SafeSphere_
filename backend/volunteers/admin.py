@@ -31,7 +31,7 @@ class VolunteerAdmin(admin.ModelAdmin):
 
 @admin.register(VolunteerRating)
 class VolunteerRatingAdmin(admin.ModelAdmin):
-    list_display = ('volunteer', 'rating', 'rater', 'created_at')
+    list_display = ('volunteer', 'rating', 'user', 'created_at')
     list_filter = ('rating', 'created_at')
-    search_fields = ('volunteer__user__username', 'rater__username')
+    search_fields = ('volunteer__user__username', 'user__username')
     readonly_fields = ('created_at',)
