@@ -1,11 +1,8 @@
-from django.urls import path, include
 from rest_framework.routers import DefaultRouter
-from .views import VolunteerViewSet, VolunteerRatingViewSet
+from .views import VolunteerProfileViewSet, AssignmentViewSet
 
 router = DefaultRouter()
-router.register(r'volunteers', VolunteerViewSet, basename='volunteer')
-router.register(r'ratings', VolunteerRatingViewSet, basename='volunteer-rating')
+router.register(r'profiles', VolunteerProfileViewSet, basename='volunteer-profile')
+router.register(r'assignments', AssignmentViewSet, basename='assignment')
 
-urlpatterns = [
-    path('', include(router.urls)),
-]
+urlpatterns = router.urls
