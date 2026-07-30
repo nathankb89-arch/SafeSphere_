@@ -1,11 +1,6 @@
-from django.urls import path, include
-from rest_framework.routers import DefaultRouter
-from .views import ReportViewSet, ReportCommentViewSet
-
-router = DefaultRouter()
-router.register(r'reports', ReportViewSet, basename='report')
-router.register(r'comments', ReportCommentViewSet, basename='report-comment')
+from django.urls import path
+from .views import EmergencyAnalyticsView
 
 urlpatterns = [
-    path('', include(router.urls)),
+    path('analytics/', EmergencyAnalyticsView.as_view(), name='emergency-analytics'),
 ]
