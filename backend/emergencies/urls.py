@@ -1,4 +1,7 @@
-from django.contrib import admin
-from .models import Emergency
+from rest_framework.routers import DefaultRouter
+from .views import EmergencyViewSet
 
-admin.site.register(Emergency)
+router = DefaultRouter()
+router.register(r'', EmergencyViewSet, basename='emergency')
+
+urlpatterns = router.urls
