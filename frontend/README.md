@@ -2,6 +2,12 @@
 
 This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
 
+## SafeSphere core flow
+
+With the Django API running at the URL in `.env`, run `npm run dev` and verify the landing page,
+anonymous emergency report, registration/login, authenticated report submission, and dashboard.
+`npm.cmd run build` completes successfully for the current core flow.
+
 Currently, two official plugins are available:
 
 - [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
