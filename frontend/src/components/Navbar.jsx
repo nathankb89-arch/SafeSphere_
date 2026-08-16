@@ -10,6 +10,7 @@ export default function Navbar() {
       <Link to="/" className="text-xl font-bold">SafeSphere</Link>
       <div className="flex items-center gap-4">
         <Link to="/report" className="font-semibold hover:underline">Report Emergency</Link>
+        <Link to="/about" className="hover:underline">About</Link>
         {user ? (
           <>
             <Link to="/dashboard" className="hover:underline">Dashboard</Link>
