@@ -7,6 +7,8 @@ import Login from './pages/Login'
 import Register from './pages/Register'
 import ReportEmergency from './pages/ReportEmergency'
 import Dashboard from './pages/Dashboard'
+import About from './pages/About'
+import Footer from './components/Footer'
 
 export default function App() {
   return (
@@ -19,7 +21,9 @@ export default function App() {
           <Route path="/register" element={<Register />} />
           <Route path="/report" element={<ReportEmergency />} />
           <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
+          <Route path="/about" element={<About />} />
         </Routes>
+        <Footer />
       </AuthProvider>
     </BrowserRouter>
   )
