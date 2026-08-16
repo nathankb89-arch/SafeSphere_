@@ -7,6 +7,8 @@ class SafetyResource(models.Model):
     name = models.CharField(max_length=255)
     category = models.CharField(max_length=100)
     phone_number = models.CharField(max_length=30)
+    website = models.URLField(blank=True)
+    email = models.EmailField(blank=True)
     region = models.CharField(max_length=100, blank=True)
     description = models.TextField(blank=True)
     is_active = models.BooleanField(default=True)
