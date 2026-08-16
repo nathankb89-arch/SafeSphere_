@@ -2,102 +2,62 @@
 
 ## Smart Community Disaster Response and Emergency Coordination Platform
 
-**Tagline:** Protecting Communities Through Smart Emergency Response
-
----
+**Protecting Communities Through Smart Emergency Response**
 
 ## Overview
 
-SafeSphere is a full-stack web application that helps communities respond to emergencies more quickly. It allows citizens to report incidents, volunteers to offer help, NGOs to coordinate relief efforts, and administrators to monitor emergency activities from one platform.
+SafeSphere is a community-focused emergency response platform designed to make reporting, coordination, and response more efficient during emergencies and disasters.
 
----
+The platform brings together citizens, volunteers, non-governmental organizations (NGOs), and administrators in a single system. It provides a structured way to report incidents, coordinate assistance, monitor ongoing emergencies, and keep affected individuals informed throughout the response process.
 
-## Problem Statement
+A key feature of SafeSphere is that **emergency reporting does not require an account**. Anyone can report an incident when immediate action is needed, reducing unnecessary barriers during critical situations. Emergency hotline information is also publicly accessible without requiring users to sign in.
 
-During disasters, it is often difficult for people to report emergencies quickly and for responders to coordinate their efforts. This can lead to delays, poor communication, and slower emergency response. SafeSphere provides one platform where communities and emergency responders can work together more effectively.
+## Why SafeSphere?
 
----
+During an emergency, delays and poor coordination can make an already difficult situation worse. People may be unsure where to report an incident, responders may lack accurate information, and relief efforts can become fragmented.
 
-## Vision
+SafeSphere addresses these challenges by providing a centralized platform where emergencies can be reported, tracked, and managed. It aims to improve communication between those who need help and those responsible for providing it.
 
-To build safer communities by using technology to improve emergency response and disaster management.
+## Key Features
 
----
+* **Emergency Reporting** — Users can report incidents such as fires, floods, accidents, and other emergencies, either with or without an account.
+* **Evidence Uploads** — Reports can include photographs to provide responders with additional information about the situation.
+* **Emergency Hotline Directory** — Important emergency contact numbers are available to everyone, without requiring authentication.
+* **Incident Tracking** — Reports can be monitored through different stages, including `Reported`, `Assigned`, `In Progress`, and `Resolved`.
+* **Notifications** — Users can receive updates as their reported emergencies are reviewed and handled.
+* **Volunteer Coordination** — Administrators can assign volunteers to specific emergencies, helping organize community-based response efforts.
+* **NGO Resource Management** — NGOs can manage information about available relief supplies and resources.
+* **Administrative Monitoring** — Administrators can oversee emergency activity, manage users and responders, and review trends and reports across incidents.
 
-## Mission
+## User Roles
 
-To provide a simple, secure, and reliable platform that helps communities report emergencies and coordinate disaster response.
+### Citizens
 
----
+Citizens are able to report emergencies, provide relevant information or photographic evidence, and monitor the progress of their reports.
 
-## Features
+### Volunteers
 
-- User Registration and Login
-- Emergency Reporting
-- Image Uploads
-- Volunteer Coordination
-- NGO Management
-- Incident Tracking
-- Dashboards
-- Reports
+Volunteers assist with emergency response by being assigned to incidents where their support is required.
 
----
+### NGOs
 
-## Technology Stack
+NGOs can coordinate relief efforts and maintain records of supplies and other resources available for emergency response.
 
-### Frontend
-- React
-- Vite
-- Tailwind CSS
+### Administrators
 
-### Backend
-- Django
-- Django REST Framework
-- PostgreSQL
-- JWT Authentication
-- Cloudinary
+Administrators oversee the platform, manage emergency incidents and users, coordinate volunteers, and monitor overall emergency response activity.
 
----
+## The Goal
 
-## Installation
+SafeSphere is built around a simple idea: **make it easier for people to get help and easier for responders to provide it.**
 
-### Clone the repository
+By bringing emergency reporting, response coordination, communication, and resource management into one platform, SafeSphere aims to support faster and more organized disaster response within communities.
 
-```bash
-git clone https://github.com/yourusername/SafeSphere.git
-cd SafeSphere
-```
+## Developer
 
-### Backend
-
-```bash
-cd backend
-python -m venv venv
-
-# Windows
-venv\Scripts\activate
-
-pip install -r requirements.txt
-python manage.py migrate
-python manage.py runserver
-```
-
-### Frontend
-
-```bash
-cd frontend
-npm install
-npm run dev
-```
-
----
-
-## Author
-
-Nathan Kiprono
-
----
+**Nathan Kiprono**
 
 ## License
 
-This project is for educational purposes.
+This project is licensed under the terms specified in the `LICENSE` file.
+
