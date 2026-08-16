@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import api from '../services/api'
+import Spinner from '../components/Spinner'
 
 export default function Landing() {
   const [hotlines, setHotlines] = useState([])
@@ -22,7 +23,7 @@ export default function Landing() {
       </section>
       <section>
         <h2 className="mb-4 text-xl font-semibold">Emergency Hotlines</h2>
-        {loading && <p>Loading hotlines...</p>}
+        {loading && <Spinner />}
         {!loading && hotlines.length === 0 && <p className="text-gray-500">No hotlines have been published yet.</p>}
         <ul className="grid gap-3 sm:grid-cols-2">
           {hotlines.map((hotline) => (
