@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import api from '../services/api'
 import Spinner from '../components/Spinner'
+import HelpBanner from '../components/HelpBanner'
 
 export default function Landing() {
   const [hotlines, setHotlines] = useState([])
@@ -16,6 +17,7 @@ export default function Landing() {
 
   return (
     <div className="mx-auto max-w-3xl px-6 py-10">
+      <HelpBanner />
       <section className="mb-10 text-center">
         <h1 className="mb-2 text-3xl font-bold">Protecting Communities Through Smart Emergency Response</h1>
         <p className="mb-6 text-gray-600">Report an emergency instantly — no account required.</p>
