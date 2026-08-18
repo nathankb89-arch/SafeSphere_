@@ -7,12 +7,15 @@ export default function Navbar() {
   const navigate = useNavigate()
 
   return (
-    <nav className="flex items-center justify-between bg-red-700 px-6 py-4 text-white shadow">
+    <nav className="flex flex-wrap items-center justify-between gap-3 bg-red-700 px-6 py-4 text-white shadow">
       <Link to="/" className="text-xl font-bold">SafeSphere</Link>
-      <div className="flex items-center gap-4">
+      <div className="flex flex-wrap items-center gap-4">
         <AccessibilityToggle />
         <Link to="/report" className="font-semibold hover:underline">Report Emergency</Link>
         <Link to="/about" className="hover:underline">About</Link>
+        <Link to="/how-it-works" className="hover:underline">How It Works</Link>
+        <Link to="/safety-tips" className="hover:underline">Safety Tips</Link>
+        <Link to="/faq" className="hover:underline">FAQ</Link>
         {user ? (
           <>
             <Link to="/dashboard" className="hover:underline">Dashboard</Link>

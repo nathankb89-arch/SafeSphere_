@@ -9,6 +9,9 @@ import ReportEmergency from './pages/ReportEmergency'
 import Dashboard from './pages/Dashboard'
 import About from './pages/About'
 import Footer from './components/Footer'
+import HowItWorks from './pages/HowItWorks'
+import FAQ from './pages/FAQ'
+import SafetyTips from './pages/SafetyTips'
 
 export default function App() {
   return (
@@ -22,6 +25,9 @@ export default function App() {
           <Route path="/report" element={<ReportEmergency />} />
           <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
           <Route path="/about" element={<About />} />
+          <Route path="/how-it-works" element={<HowItWorks />} />
+          <Route path="/faq" element={<FAQ />} />
+          <Route path="/safety-tips" element={<SafetyTips />} />
         </Routes>
         <Footer />
       </AuthProvider>
