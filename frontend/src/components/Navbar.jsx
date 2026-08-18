@@ -1,5 +1,6 @@
 import { Link, useNavigate } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
+import AccessibilityToggle from './AccessibilityToggle'
 
 export default function Navbar() {
   const { user, logout } = useAuth()
@@ -9,6 +10,7 @@ export default function Navbar() {
     <nav className="flex items-center justify-between bg-red-700 px-6 py-4 text-white shadow">
       <Link to="/" className="text-xl font-bold">SafeSphere</Link>
       <div className="flex items-center gap-4">
+        <AccessibilityToggle />
         <Link to="/report" className="font-semibold hover:underline">Report Emergency</Link>
         <Link to="/about" className="hover:underline">About</Link>
         {user ? (
