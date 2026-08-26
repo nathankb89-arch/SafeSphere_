@@ -13,27 +13,30 @@ function FAQItem({ q, a }) {
   const [open, setOpen] = useState(false)
 
   return (
-    <div className="rounded-lg border">
+    <div className="info-card rounded-2xl p-0 overflow-hidden">
       <button
         type="button"
         onClick={() => setOpen(!open)}
         aria-expanded={open}
-        className="flex w-full items-center justify-between px-4 py-3 text-left font-medium"
+        className="flex w-full items-center justify-between px-5 py-4 text-left text-base font-semibold text-slate-900 dark:text-white"
       >
         {q}
-        <span aria-hidden="true" className="ml-4 text-gray-400">{open ? '−' : '+'}</span>
+        <span aria-hidden="true" className="ml-4 text-xl text-red-600">{open ? '−' : '+'}</span>
       </button>
-      {open && <p className="px-4 pb-3 text-gray-600">{a}</p>}
+      {open && <p className="border-t border-slate-200 px-5 py-4 text-sm leading-6 text-slate-600 dark:border-slate-700 dark:text-slate-300">{a}</p>}
     </div>
   )
 }
 
 export default function FAQ() {
   return (
-    <main className="mx-auto max-w-2xl px-6 py-10">
-      <h1 className="mb-6 text-2xl font-bold">Frequently Asked Questions</h1>
-      <div className="space-y-3">
-        {FAQS.map((item) => <FAQItem key={item.q} {...item} />)}
+    <main className="page-shell py-12">
+      <div className="container max-w-3xl">
+        <p className="eyebrow">FAQ</p>
+        <h1 className="section-title">Frequently asked questions</h1>
+        <div className="mt-8 space-y-3">
+          {FAQS.map((item) => <FAQItem key={item.q} {...item} />)}
+        </div>
       </div>
     </main>
   )

@@ -7,11 +7,11 @@ export default function AccessibilityToggle() {
     <button
       type="button"
       onClick={() => setLargeText(!largeText)}
-      className="text-sm underline"
+      className="inline-flex items-center justify-center rounded-full border border-white/20 bg-white/5 px-3 py-2 text-sm font-medium text-white transition hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/80"
       aria-label="Toggle larger text"
       aria-pressed={largeText}
     >
-      {largeText ? 'Normal Text' : 'Larger Text'}
+      {largeText ? 'Normal text' : 'Larger text'}
     </button>
   )
 }

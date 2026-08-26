@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
 
 export default function Login() {
@@ -10,11 +10,18 @@ export default function Login() {
     try { await login(form.username, form.password); navigate('/dashboard') } catch { setError('Invalid username or password.') }
   }
   return (
-    <form onSubmit={handleSubmit} className="mx-auto max-w-md space-y-4 px-6 py-10">
-      <h1 className="text-2xl font-bold">Log In</h1>{error && <p className="text-sm text-red-600">{error}</p>}
-      <input placeholder="Username" required onChange={(event) => setForm({ ...form, username: event.target.value })} className="w-full rounded border p-2" />
-      <input type="password" placeholder="Password" required onChange={(event) => setForm({ ...form, password: event.target.value })} className="w-full rounded border p-2" />
-      <button type="submit" className="w-full rounded bg-red-700 py-2 font-semibold text-white">Log In</button>
-    </form>
+    <main className="page-shell py-12">
+      <form onSubmit={handleSubmit} className="form-shell space-y-5">
+        <div>
+          <p className="eyebrow">Welcome back</p>
+          <h1 className="section-title small">Log in</h1>
+        </div>
+        {error && <p className="rounded-xl bg-red-50 p-3 text-sm font-medium text-red-700 dark:bg-red-950/30 dark:text-red-300">{error}</p>}
+        <input placeholder="Username" required onChange={(event) => setForm({ ...form, username: event.target.value })} className="field" />
+        <input type="password" placeholder="Password" required onChange={(event) => setForm({ ...form, password: event.target.value })} className="field" />
+        <button type="submit" className="primary-btn w-full">Log in</button>
+        <p className="text-center text-sm text-slate-600 dark:text-slate-300">Need an account? <Link to="/register" className="font-semibold text-red-700 dark:text-red-400">Create one</Link></p>
+      </form>
+    </main>
   )
 }

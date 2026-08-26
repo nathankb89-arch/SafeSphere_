@@ -10,20 +10,24 @@ const TIPS = {
 
 export default function SafetyTips() {
   return (
-    <main className="mx-auto max-w-2xl px-6 py-10">
-      <h1 className="mb-2 text-2xl font-bold">Safety Tips</h1>
-      <p className="mb-8 text-gray-600">
-        Simple guidance for common emergencies. This does not replace professional help — always report the emergency and follow instructions from responders.
-      </p>
-      <div className="space-y-6">
-        {Object.entries(TIPS).map(([type, tips]) => (
-          <section key={type} className="rounded-lg border p-4">
-            <h2 className="mb-2 font-semibold capitalize">{getEmergencyIcon(type)} {type}</h2>
-            <ul className="list-inside list-disc space-y-1 text-gray-600">
-              {tips.map((tip) => <li key={tip}>{tip}</li>)}
-            </ul>
-          </section>
-        ))}
+    <main className="page-shell py-12">
+      <div className="container max-w-4xl">
+        <p className="eyebrow">Safety guidance</p>
+        <h1 className="section-title">Simple safety steps for common emergencies.</h1>
+        <p className="lead-text">
+          Simple guidance for common emergencies. This does not replace professional help — always report the emergency and follow instructions from responders.
+        </p>
+
+        <div className="mt-8 space-y-5">
+          {Object.entries(TIPS).map(([type, tips]) => (
+            <section key={type} className="info-card">
+              <h2 className="text-xl font-bold capitalize text-slate-900 dark:text-white">{getEmergencyIcon(type)} {type}</h2>
+              <ul className="mt-4 list-inside list-disc space-y-2 text-slate-600 dark:text-slate-300">
+                {tips.map((tip) => <li key={tip}>{tip}</li>)}
+              </ul>
+            </section>
+          ))}
+        </div>
       </div>
     </main>
   )

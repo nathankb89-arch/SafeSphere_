@@ -28,24 +28,28 @@ const STEPS = [
 
 export default function HowItWorks() {
   return (
-    <main className="mx-auto max-w-2xl px-6 py-10">
-      <h1 className="mb-2 text-2xl font-bold">How SafeSphere Works</h1>
-      <p className="mb-8 text-gray-600">
-        Reporting an emergency takes less than a minute. Here is exactly what happens, step by step.
-      </p>
-      <ol className="space-y-6">
-        {STEPS.map((step) => (
-          <li key={step.number} className="flex gap-4">
-            <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-red-700 font-bold text-white">
-              {step.number}
-            </span>
-            <div>
-              <p className="font-semibold">{step.title}</p>
-              <p className="text-gray-600">{step.text}</p>
-            </div>
-          </li>
-        ))}
-      </ol>
+    <main className="page-shell py-12">
+      <div className="container max-w-4xl">
+        <p className="eyebrow">How it works</p>
+        <h1 className="section-title">Make a report in under a minute.</h1>
+        <p className="lead-text">
+          Reporting an emergency takes less than a minute. Here is exactly what happens, step by step.
+        </p>
+
+        <ol className="mt-8 space-y-5">
+          {STEPS.map((step) => (
+            <li key={step.number} className="info-card flex gap-4 rounded-2xl p-5">
+              <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-red-600 font-black text-white shadow-lg shadow-red-600/20">
+                {step.number}
+              </span>
+              <div>
+                <p className="text-xl font-bold text-slate-900 dark:text-white">{step.title}</p>
+                <p className="mt-2 text-slate-600 dark:text-slate-300">{step.text}</p>
+              </div>
+            </li>
+          ))}
+        </ol>
+      </div>
     </main>
   )
 }
