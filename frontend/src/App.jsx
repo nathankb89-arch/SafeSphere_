@@ -12,6 +12,7 @@ import Footer from './components/Footer'
 import HowItWorks from './pages/HowItWorks'
 import FAQ from './pages/FAQ'
 import SafetyTips from './pages/SafetyTips'
+import EmergencyEducation from './pages/EmergencyEducation'
 
 export default function App() {
   return (
@@ -28,6 +29,7 @@ export default function App() {
           <Route path="/how-it-works" element={<HowItWorks />} />
           <Route path="/faq" element={<FAQ />} />
           <Route path="/safety-tips" element={<SafetyTips />} />
+          <Route path="/education" element={<EmergencyEducation />} />
         </Routes>
         <Footer />
       </AuthProvider>
