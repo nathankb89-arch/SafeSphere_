@@ -15,17 +15,17 @@ export default function Footer() {
         <div>
           <p className="text-sm font-bold uppercase tracking-[0.18em] text-red-400">Quick access</p>
           <ul className="mt-4 space-y-3 text-sm text-slate-400">
-            <li><a href="/report" className="transition hover:text-white">Report emergency</a></li>
-            <li><a href="/education" className="transition hover:text-white">Emergency education</a></li>
-            <li><a href="/safety-tips" className="transition hover:text-white">Safety tips</a></li>
+            <li><a href="/report" className="flex items-center gap-2 transition hover:text-white"><span aria-hidden="true" className="text-red-400">!</span>Report emergency</a></li>
+            <li><a href="/education" className="flex items-center gap-2 transition hover:text-white"><span aria-hidden="true" className="text-red-400">+</span>Emergency education</a></li>
+            <li><a href="/safety-tips" className="flex items-center gap-2 transition hover:text-white"><span aria-hidden="true" className="text-red-400">✓</span>Safety tips</a></li>
           </ul>
         </div>
         <div>
           <p className="text-sm font-bold uppercase tracking-[0.18em] text-red-400">Contact SafeSphere</p>
           <div className="mt-4 space-y-3 text-sm">
-            <a href="tel:0741672799" className="block text-white transition hover:text-red-300">0741672799</a>
-            <a href="https://instagram.com/nate.afterhrz" target="_blank" rel="noreferrer" className="block text-slate-400 transition hover:text-white">Instagram: @nate.afterhrz</a>
-            <a href="https://github.com/nathankb89-arch" target="_blank" rel="noreferrer" className="block text-slate-400 transition hover:text-white">GitHub: @nathankb89-arch</a>
+            <a href="tel:0741672799" className="flex items-center gap-2 text-white transition hover:text-red-300"><span aria-hidden="true" className="text-red-400">☎</span>0741672799</a>
+            <a href="https://instagram.com/nate.afterhrz" target="_blank" rel="noreferrer" className="flex items-center gap-2 text-slate-400 transition hover:text-white"><span aria-hidden="true" className="text-red-400">◎</span>Instagram: @nate.afterhrz</a>
+            <a href="https://github.com/nathankb89-arch" target="_blank" rel="noreferrer" className="flex items-center gap-2 text-slate-400 transition hover:text-white"><span aria-hidden="true" className="text-red-400">◈</span>GitHub: @nathankb89-arch</a>
           </div>
         </div>
       </div>
