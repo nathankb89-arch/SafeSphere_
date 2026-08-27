@@ -19,7 +19,7 @@ const PROFESSIONALS = [
     accent: 'status-red',
   },
   {
-    name: 'Lina Hassan',
+    name: 'Lina Hadhjime',
     role: 'First-aid instructor',
     category: 'First aid',
     description: 'Demonstration profile for basic first-aid learning and community training resources.',
@@ -27,7 +27,7 @@ const PROFESSIONALS = [
     accent: 'status-green',
   },
   {
-    name: 'Samuel Kariuki',
+    name: 'Samuel Anderson',
     role: 'Search and rescue coordinator',
     category: 'Search & rescue',
     description: 'Demonstration profile for preparedness, missing-person response, and rescue coordination.',
@@ -35,7 +35,7 @@ const PROFESSIONALS = [
     accent: 'status-amber',
   },
   {
-    name: 'Grace Wanjiku',
+    name: 'Grace Everleen',
     role: 'Mental health professional',
     category: 'Mental health',
     description: 'Demonstration profile for crisis support education and compassionate referral guidance.',
