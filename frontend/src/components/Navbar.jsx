@@ -1,4 +1,4 @@
-import { Link, useNavigate } from 'react-router-dom'
+import { Link, NavLink, useNavigate } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
 import AccessibilityToggle from './AccessibilityToggle'
 import ThemeToggle from './ThemeToggle'
@@ -19,12 +19,27 @@ export default function Navbar() {
         </Link>
 
         <div className="hidden items-center gap-6 text-sm text-slate-200 lg:flex">
-          <Link to="/report" className="font-semibold text-white transition hover:text-red-300">Report</Link>
-          <Link to="/education" className="transition hover:text-red-300">Education</Link>
-          <Link to="/how-it-works" className="transition hover:text-red-300">How it works</Link>
-          <Link to="/safety-tips" className="transition hover:text-red-300">Safety tips</Link>
-          <Link to="/faq" className="transition hover:text-red-300">FAQ</Link>
-          <Link to="/about" className="transition hover:text-red-300">About</Link>
+          {[
+            ['/report', 'Report'],
+            ['/education', 'Education'],
+            ['/how-it-works', 'How it works'],
+            ['/safety-tips', 'Safety tips'],
+            ['/faq', 'FAQ'],
+            ['/about', 'About'],
+          ].map(([to, label]) => (
+            <NavLink
+              key={to}
+              to={to}
+              className={({ isActive }) => `relative py-2 transition hover:text-red-300 ${isActive ? 'font-semibold text-white' : ''}`}
+            >
+              {({ isActive }) => (
+                <>
+                  {label}
+                  <span aria-hidden="true" className={`absolute inset-x-0 -bottom-1 h-0.5 rounded-full bg-red-500 transition-opacity ${isActive ? 'opacity-100' : 'opacity-0'}`} />
+                </>
+              )}
+            </NavLink>
+          ))}
         </div>
 
         <div className="flex items-center gap-2 sm:gap-3">
