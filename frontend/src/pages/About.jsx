@@ -4,7 +4,16 @@ import Spinner from '../components/Spinner'
 
 export default function About() {
   const [info, setInfo] = useState(null)
-  useEffect(() => { api.get('/safety/about/').then((res) => setInfo(res.data)) }, [])
+  useEffect(() => {
+    api.get('/safety/about/')
+      .then((res) => setInfo(res.data))
+      .catch(() => setInfo({
+        name: 'SafeSphere',
+        tagline: 'Protecting communities through smart emergency response.',
+        mission: 'SafeSphere helps people report emergencies, find guidance, and connect with support while professional responders are on the way.',
+        contact_email: 'support@safesphere.local',
+      }))
+  }, [])
   if (!info) return <Spinner />
   return (
     <main className="page-shell py-12">
