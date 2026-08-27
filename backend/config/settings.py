@@ -20,8 +20,8 @@ import os
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = config('SECRET_KEY')
-DEBUG = config('DEBUG')
-allowed_hosts_str = config('ALLOWED_HOSTS', '')
+DEBUG = config('DEBUG', default=False, cast=bool)
+allowed_hosts_str = config('ALLOWED_HOSTS', default='localhost,127.0.0.1')
 ALLOWED_HOSTS = [host.strip() for host in allowed_hosts_str.split(',') if host.strip()]
 
 INSTALLED_APPS = [
