@@ -14,6 +14,8 @@ import FAQ from './pages/FAQ'
 import SafetyTips from './pages/SafetyTips'
 import EmergencyEducation from './pages/EmergencyEducation'
 import Profile from './pages/Profile'
+import Professionals from './pages/Professionals'
+import FirstAid from './pages/FirstAid'
 
 export default function App() {
   return (
@@ -32,6 +34,8 @@ export default function App() {
           <Route path="/faq" element={<FAQ />} />
           <Route path="/safety-tips" element={<SafetyTips />} />
           <Route path="/education" element={<EmergencyEducation />} />
+          <Route path="/first-aid" element={<FirstAid />} />
+          <Route path="/professionals" element={<Professionals />} />
         </Routes>
         <Footer />
       </AuthProvider>
