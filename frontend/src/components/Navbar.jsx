@@ -89,11 +89,11 @@ export default function Navbar() {
               <div className="my-2 border-t border-slate-200 dark:border-slate-700" />
               <div className="flex items-center justify-between px-3 py-2">
                 <span className="text-sm font-semibold">Appearance</span>
-                <ThemeToggle compact />
+                <ThemeToggle compact inMenu />
               </div>
               <div className="flex items-center justify-between px-3 py-2">
                 <span className="text-sm font-semibold">Text size</span>
-                <AccessibilityToggle />
+                <AccessibilityToggle inMenu />
               </div>
               {user && <button onClick={() => { logout(); navigate('/'); closeAndNavigate() }} className="mt-1 w-full rounded-xl px-3 py-2.5 text-left text-sm font-semibold text-red-700 transition hover:bg-red-50 dark:text-red-300 dark:hover:bg-red-950/40" role="menuitem">Log out</button>}
             </div>
