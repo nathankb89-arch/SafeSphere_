@@ -7,7 +7,7 @@ const PROFESSIONALS = [
     role: 'Emergency medicine',
     category: 'Medical',
     description: 'Demonstration profile for emergency care education and community preparedness.',
-    image: 'https://images.unsplash.com/photo-1559839734-2b71ea197ec2?auto=format&fit=crop&w=500&q=80',
+    image: 'https://images.unsplash.com/photo-1531123897727-8f129e1688ce?auto=format&fit=crop&w=500&q=80',
     accent: 'status-blue',
   },
   {
@@ -15,7 +15,7 @@ const PROFESSIONALS = [
     role: 'Fire and rescue specialist',
     category: 'Fire & rescue',
     description: 'Demonstration profile for fire prevention, evacuation planning, and rescue awareness.',
-    image: 'https://images.unsplash.com/photo-1582750433449-648ed127bb54?auto=format&fit=crop&w=500&q=80',
+    image: 'https://images.unsplash.com/photo-1504593811423-6dd665756598?auto=format&fit=crop&w=500&q=80',
     accent: 'status-red',
   },
   {
@@ -23,7 +23,7 @@ const PROFESSIONALS = [
     role: 'First-aid instructor',
     category: 'First aid',
     description: 'Demonstration profile for basic first-aid learning and community training resources.',
-    image: 'https://images.unsplash.com/photo-1594824476967-48c8b964273f?auto=format&fit=crop&w=500&q=80',
+    image: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=500&q=80',
     accent: 'status-green',
   },
   {
@@ -31,7 +31,7 @@ const PROFESSIONALS = [
     role: 'Search and rescue coordinator',
     category: 'Search & rescue',
     description: 'Demonstration profile for preparedness, missing-person response, and rescue coordination.',
-    image: 'https://images.unsplash.com/photo-1556761175-b413da4baf72?auto=format&fit=crop&w=500&q=80',
+    image: 'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=500&q=80',
     accent: 'status-amber',
   },
   {
@@ -39,7 +39,7 @@ const PROFESSIONALS = [
     role: 'Mental health professional',
     category: 'Mental health',
     description: 'Demonstration profile for crisis support education and compassionate referral guidance.',
-    image: 'https://images.unsplash.com/photo-1551836022-d5d88e9218df?auto=format&fit=crop&w=500&q=80',
+    image: 'https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=500&q=80',
     accent: 'status-purple',
   },
   {
@@ -47,7 +47,7 @@ const PROFESSIONALS = [
     role: 'Disaster preparedness advisor',
     category: 'Preparedness',
     description: 'Demonstration profile for household readiness, hazards, and community response planning.',
-    image: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=500&q=80',
+    image: 'https://images.unsplash.com/photo-1529139574466-a303027c1d8b?auto=format&fit=crop&w=500&q=80',
     accent: 'status-amber',
   },
 ]
