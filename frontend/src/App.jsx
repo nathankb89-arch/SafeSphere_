@@ -13,6 +13,7 @@ import HowItWorks from './pages/HowItWorks'
 import FAQ from './pages/FAQ'
 import SafetyTips from './pages/SafetyTips'
 import EmergencyEducation from './pages/EmergencyEducation'
+import Profile from './pages/Profile'
 
 export default function App() {
   return (
@@ -25,6 +26,7 @@ export default function App() {
           <Route path="/register" element={<Register />} />
           <Route path="/report" element={<ReportEmergency />} />
           <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
+          <Route path="/profile" element={<ProtectedRoute><Profile /></ProtectedRoute>} />
           <Route path="/about" element={<About />} />
           <Route path="/how-it-works" element={<HowItWorks />} />
           <Route path="/faq" element={<FAQ />} />

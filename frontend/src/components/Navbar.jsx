@@ -1,3 +1,4 @@
+import { useEffect, useRef, useState } from 'react'
 import { Link, NavLink, useNavigate } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
 import AccessibilityToggle from './AccessibilityToggle'
@@ -6,6 +7,21 @@ import ThemeToggle from './ThemeToggle'
 export default function Navbar() {
   const { user, logout } = useAuth()
   const navigate = useNavigate()
+  const [menuOpen, setMenuOpen] = useState(false)
+  const menuRef = useRef(null)
+
+  useEffect(() => {
+    const closeMenu = (event) => {
+      if (!menuRef.current?.contains(event.target)) setMenuOpen(false)
+    }
+    document.addEventListener('mousedown', closeMenu)
+    return () => document.removeEventListener('mousedown', closeMenu)
+  }, [])
+
+  const closeAndNavigate = () => setMenuOpen(false)
+  const menuLinks = user
+    ? [['/profile', 'Profile'], ['/dashboard', 'Dashboard']]
+    : [['/login', 'Log in'], ['/register', 'Create account']]
 
   return (
     <header className="sticky top-0 z-50 border-b border-slate-200/80 bg-slate-950/95 text-white backdrop-blur-md dark:border-slate-700 dark:bg-slate-950/90">
@@ -42,20 +58,45 @@ export default function Navbar() {
           ))}
         </div>
 
-        <div className="flex items-center gap-2 sm:gap-3">
-          <AccessibilityToggle />
-          <ThemeToggle />
-          {user ? (
-            <>
-              <Link to="/dashboard" className="hidden rounded-full border border-white/20 bg-white/5 px-3 py-2 text-sm font-medium text-white transition hover:bg-white/10 sm:inline-flex">Dashboard</Link>
-              <span className="hidden text-sm text-slate-300 sm:inline">Hi, {user.username}</span>
-              <button onClick={() => { logout(); navigate('/') }} className="inline-flex items-center rounded-full bg-red-600 px-4 py-2 text-sm font-semibold text-white shadow-lg shadow-red-600/20 transition hover:bg-red-500">Logout</button>
-            </>
-          ) : (
-            <>
-              <Link to="/login" className="hidden rounded-full border border-white/20 bg-white/5 px-3 py-2 text-sm font-medium text-white transition hover:bg-white/10 sm:inline-flex">Login</Link>
-              <Link to="/register" className="inline-flex items-center rounded-full bg-white px-4 py-2 text-sm font-semibold text-slate-900 transition hover:bg-slate-100">Sign up</Link>
-            </>
+        <div className="relative flex items-center gap-2 sm:gap-3" ref={menuRef}>
+          {user && <span className="hidden text-sm text-slate-300 xl:inline">Hi, {user.username}</span>}
+          {!user && <Link to="/register" className="hidden rounded-full bg-white px-4 py-2 text-sm font-semibold text-slate-900 transition hover:bg-slate-100 sm:inline-flex">Sign up</Link>}
+          <button
+            type="button"
+            onClick={() => setMenuOpen((open) => !open)}
+            className="inline-flex h-10 items-center gap-2 rounded-full border border-white/20 bg-white/10 px-3 text-sm font-semibold text-white transition hover:bg-white/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/80"
+            aria-expanded={menuOpen}
+            aria-haspopup="menu"
+            aria-label="Open account and preferences menu"
+          >
+            <span aria-hidden="true" className="flex h-6 w-6 items-center justify-center rounded-full bg-red-600 text-xs font-black">{user?.username?.charAt(0).toUpperCase() || 'S'}</span>
+            <span className="hidden sm:inline">{user ? 'Account' : 'Menu'}</span>
+            <span aria-hidden="true" className={`text-xs transition-transform ${menuOpen ? 'rotate-180' : ''}`}>⌄</span>
+          </button>
+
+          {menuOpen && (
+            <div className="absolute right-0 top-12 z-50 w-64 overflow-hidden rounded-2xl border border-slate-200 bg-white p-2 text-slate-700 shadow-2xl dark:border-slate-700 dark:bg-slate-900 dark:text-slate-200" role="menu">
+              <div className="border-b border-slate-200 px-3 py-3 dark:border-slate-700">
+                <p className="text-xs font-bold uppercase tracking-[0.16em] text-red-600 dark:text-red-400">{user ? 'Your SafeSphere' : 'SafeSphere menu'}</p>
+                <p className="mt-1 truncate text-sm text-slate-500 dark:text-slate-400">{user ? user.username : 'Emergency help and preferences'}</p>
+              </div>
+              {menuLinks.map(([to, label]) => (
+                <NavLink key={to} to={to} onClick={closeAndNavigate} className="block rounded-xl px-3 py-2.5 text-sm font-semibold transition hover:bg-red-50 hover:text-red-700 dark:hover:bg-red-950/40 dark:hover:text-red-300" role="menuitem">{label}</NavLink>
+              ))}
+              <div className="my-2 border-t border-slate-200 dark:border-slate-700" />
+              <NavLink to="/faq" onClick={closeAndNavigate} className="block rounded-xl px-3 py-2.5 text-sm transition hover:bg-slate-100 dark:hover:bg-slate-800" role="menuitem">FAQ & support</NavLink>
+              <NavLink to="/about" onClick={closeAndNavigate} className="block rounded-xl px-3 py-2.5 text-sm transition hover:bg-slate-100 dark:hover:bg-slate-800" role="menuitem">About SafeSphere</NavLink>
+              <div className="my-2 border-t border-slate-200 dark:border-slate-700" />
+              <div className="flex items-center justify-between px-3 py-2">
+                <span className="text-sm font-semibold">Appearance</span>
+                <ThemeToggle compact />
+              </div>
+              <div className="flex items-center justify-between px-3 py-2">
+                <span className="text-sm font-semibold">Text size</span>
+                <AccessibilityToggle />
+              </div>
+              {user && <button onClick={() => { logout(); navigate('/'); closeAndNavigate() }} className="mt-1 w-full rounded-xl px-3 py-2.5 text-left text-sm font-semibold text-red-700 transition hover:bg-red-50 dark:text-red-300 dark:hover:bg-red-950/40" role="menuitem">Log out</button>}
+            </div>
           )}
         </div>
       </nav>
