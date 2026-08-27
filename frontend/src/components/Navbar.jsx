@@ -40,8 +40,6 @@ export default function Navbar() {
             ['/education', 'Education'],
             ['/how-it-works', 'How it works'],
             ['/safety-tips', 'Safety tips'],
-            ['/faq', 'FAQ'],
-            ['/about', 'About'],
           ].map(([to, label]) => (
             <NavLink
               key={to}
