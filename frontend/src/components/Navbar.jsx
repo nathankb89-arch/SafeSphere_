@@ -86,7 +86,6 @@ export default function Navbar() {
               <NavLink to="/faq" onClick={closeAndNavigate} className="block rounded-xl px-3 py-2.5 text-sm transition hover:bg-slate-100 dark:hover:bg-slate-800" role="menuitem">FAQ & support</NavLink>
               <NavLink to="/about" onClick={closeAndNavigate} className="block rounded-xl px-3 py-2.5 text-sm transition hover:bg-slate-100 dark:hover:bg-slate-800" role="menuitem">About SafeSphere</NavLink>
               <NavLink to="/first-aid" onClick={closeAndNavigate} className="block rounded-xl px-3 py-2.5 text-sm transition hover:bg-slate-100 dark:hover:bg-slate-800" role="menuitem">First-aid education</NavLink>
-              <NavLink to="/professionals" onClick={closeAndNavigate} className="block rounded-xl px-3 py-2.5 text-sm transition hover:bg-slate-100 dark:hover:bg-slate-800" role="menuitem">Professional network</NavLink>
               <div className="my-2 border-t border-slate-200 dark:border-slate-700" />
               <div className="flex items-center justify-between px-3 py-2">
                 <span className="text-sm font-semibold">Appearance</span>
