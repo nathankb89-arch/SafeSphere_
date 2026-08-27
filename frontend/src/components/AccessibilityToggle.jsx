@@ -11,7 +11,8 @@ export default function AccessibilityToggle() {
       aria-label="Toggle larger text"
       aria-pressed={largeText}
     >
-      {largeText ? 'Normal text' : 'Larger text'}
+      <span className="sm:hidden">A+</span>
+      <span className="hidden sm:inline">{largeText ? 'Normal text' : 'Larger text'}</span>
     </button>
   )
 }

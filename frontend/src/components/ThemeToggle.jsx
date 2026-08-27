@@ -18,7 +18,8 @@ export default function ThemeToggle() {
       aria-label="Toggle light and dark theme"
       aria-pressed={theme === 'dark'}
     >
-      {theme === 'dark' ? 'Light mode' : 'Dark mode'}
+      <span className="sm:hidden">{theme === 'dark' ? 'L' : 'D'}</span>
+      <span className="hidden sm:inline">{theme === 'dark' ? 'Light mode' : 'Dark mode'}</span>
     </button>
   )
 }
