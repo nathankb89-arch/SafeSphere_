@@ -1,7 +1,9 @@
-import { useEffect, useMemo, useRef, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { Link } from 'react-router-dom'
+import { CircleMarker, MapContainer, Popup, TileLayer, useMap } from 'react-leaflet'
 import api from '../services/api'
 import { getEmergencyIcon } from '../utils/emergencyIcons'
+import 'leaflet/dist/leaflet.css'
 import './Map.css'
 
 const DEMO_EMERGENCIES = [
@@ -13,10 +15,37 @@ const DEMO_EMERGENCIES = [
 
 const SEVERITIES = ['all', 'critical', 'high', 'medium', 'low']
 const STATUS_LABELS = { reported: 'Reported', assigned: 'Assigned', in_progress: 'In progress', resolved: 'Resolved' }
-const KIGALI_CENTER = { lat: -1.9441, lng: 30.0619 }
+const KIGALI_CENTER = [-1.9441, 30.0619]
 
 function formatTime(date) {
   return new Intl.DateTimeFormat('en', { hour: 'numeric', minute: '2-digit' }).format(new Date(date))
+}
+
+function LeafletIncidentLayer({ emergencies, onSelect }) {
+  const map = useMap()
+
+  useEffect(() => {
+    const coordinates = emergencies.filter((emergency) => emergency.latitude != null && emergency.longitude != null).map((emergency) => [Number(emergency.latitude), Number(emergency.longitude)])
+    if (coordinates.length > 1) map.fitBounds(coordinates, { padding: [48, 48], maxZoom: 14 })
+    else if (coordinates.length === 1) map.setView(coordinates[0], 14)
+  }, [emergencies, map])
+
+  return emergencies.map((emergency) => emergency.latitude != null && emergency.longitude != null && (
+    <CircleMarker
+      key={emergency.id}
+      center={[Number(emergency.latitude), Number(emergency.longitude)]}
+      pathOptions={{ color: '#ffffff', weight: 3, fillColor: emergency.severity === 'critical' ? '#d94835' : emergency.severity === 'high' ? '#ed9c31' : emergency.severity === 'medium' ? '#4b87ce' : '#51a471', fillOpacity: 1 }}
+      radius={emergency.severity === 'critical' ? 12 : 9}
+      eventHandlers={{ click: () => onSelect(emergency.id) }}
+    >
+      <Popup><strong>{getEmergencyIcon(emergency.emergency_type)} {emergency.location}</strong><br />{emergency.description}</Popup>
+    </CircleMarker>
+  ))
+}
+
+function LeafletControls() {
+  const map = useMap()
+  return <div className="map-controls"><button type="button" onClick={() => map.zoomIn()} aria-label="Zoom in">+</button><button type="button" onClick={() => map.zoomOut()} aria-label="Zoom out">−</button><button type="button" onClick={() => map.setView(KIGALI_CENTER, 13)} aria-label="Center map">⌖</button></div>
 }
 
 export default function Map() {
@@ -26,11 +55,6 @@ export default function Map() {
   const [query, setQuery] = useState('')
   const [loading, setLoading] = useState(true)
   const [usingDemo, setUsingDemo] = useState(false)
-  const [mapsStatus, setMapsStatus] = useState('loading')
-  const mapRef = useRef(null)
-  const mapInstanceRef = useRef(null)
-  const markersRef = useRef([])
-  const mapsLibrariesRef = useRef(null)
 
   const fetchEmergencies = async () => {
     setLoading(true)
@@ -54,66 +78,6 @@ export default function Map() {
   }), [emergencies, query, severity])
 
   useEffect(() => { fetchEmergencies() }, [])
-
-  useEffect(() => {
-    const apiKey = import.meta.env.VITE_GOOGLE_MAPS_API_KEY
-    if (!apiKey) { setMapsStatus('missing-key'); return undefined }
-
-    let cancelled = false
-    const loadMaps = async () => {
-      try {
-        if (!window.google?.maps) {
-          await new Promise((resolve, reject) => {
-            const script = document.createElement('script')
-            script.src = `https://maps.googleapis.com/maps/api/js?key=${encodeURIComponent(apiKey)}&libraries=marker&loading=async`
-            script.async = true
-            script.onload = resolve
-            script.onerror = reject
-            document.head.appendChild(script)
-          })
-        }
-        const [mapsLibrary, markerLibrary] = await Promise.all([
-          window.google.maps.importLibrary('maps'),
-          window.google.maps.importLibrary('marker'),
-        ])
-        if (!cancelled) { mapsLibrariesRef.current = { Map: mapsLibrary.Map, AdvancedMarkerElement: markerLibrary.AdvancedMarkerElement }; setMapsStatus('ready') }
-      } catch { if (!cancelled) setMapsStatus('error') }
-    }
-    loadMaps()
-    return () => { cancelled = true }
-  }, [])
-
-  useEffect(() => {
-    if (mapsStatus !== 'ready' || !mapRef.current || !mapsLibrariesRef.current) return
-    mapInstanceRef.current = new mapsLibrariesRef.current.Map(mapRef.current, {
-      center: KIGALI_CENTER,
-      zoom: 13,
-      mapId: import.meta.env.VITE_GOOGLE_MAPS_MAP_ID || undefined,
-      streetViewControl: false,
-      mapTypeControl: false,
-      fullscreenControl: false,
-      clickableIcons: false,
-    })
-    return () => { mapInstanceRef.current = null }
-  }, [mapsStatus])
-
-  useEffect(() => {
-    if (!mapInstanceRef.current || !window.google?.maps || !mapsLibrariesRef.current?.AdvancedMarkerElement || !filteredEmergencies.length) return
-    markersRef.current.forEach((marker) => { marker.map = null })
-    markersRef.current = []
-    const bounds = new window.google.maps.LatLngBounds()
-    filteredEmergencies.forEach((emergency) => {
-      if (emergency.latitude == null || emergency.longitude == null) return
-      const position = { lat: Number(emergency.latitude), lng: Number(emergency.longitude) }
-      const marker = new mapsLibrariesRef.current.AdvancedMarkerElement({ map: mapInstanceRef.current, position, title: emergency.location })
-      marker.addListener('click', () => setSelectedId(emergency.id))
-      markersRef.current.push(marker)
-      bounds.extend(position)
-    })
-    if (markersRef.current.length > 1) mapInstanceRef.current.fitBounds(bounds, 80)
-    else if (markersRef.current.length === 1) { mapInstanceRef.current.setCenter(markersRef.current[0].position); mapInstanceRef.current.setZoom(14) }
-    return () => { markersRef.current.forEach((marker) => { marker.map = null }); markersRef.current = [] }
-  }, [filteredEmergencies])
 
   const selected = filteredEmergencies.find((emergency) => emergency.id === selectedId) ?? filteredEmergencies[0]
   const coordinateCount = filteredEmergencies.filter((emergency) => emergency.latitude != null && emergency.longitude != null).length
@@ -164,10 +128,11 @@ export default function Map() {
         </aside>
 
         <div className="map-canvas">
-          <div ref={mapRef} className="google-map" aria-label="Google map showing emergency locations" />
-          {mapsStatus === 'missing-key' && <div className="map-config-message"><strong>Google Maps is ready to connect</strong><span>Add <code>VITE_GOOGLE_MAPS_API_KEY</code> to the frontend environment to load live map tiles.</span></div>}
-          {mapsStatus === 'error' && <div className="map-config-message"><strong>Google Maps could not load</strong><span>Check the API key, billing account, and Maps JavaScript API access.</span></div>}
-          <div className="map-controls"><button type="button" onClick={() => mapInstanceRef.current?.setZoom((mapInstanceRef.current.getZoom() || 13) + 1)} aria-label="Zoom in">+</button><button type="button" onClick={() => mapInstanceRef.current?.setZoom(Math.max((mapInstanceRef.current.getZoom() || 13) - 1, 3))} aria-label="Zoom out">−</button><button type="button" onClick={() => mapInstanceRef.current?.panTo(KIGALI_CENTER)} aria-label="Center map">⌖</button></div>
+          <MapContainer center={KIGALI_CENTER} zoom={13} scrollWheelZoom className="leaflet-map" aria-label="OpenStreetMap showing emergency locations">
+            <TileLayer attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors' url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
+            <LeafletIncidentLayer emergencies={filteredEmergencies} onSelect={setSelectedId} />
+            <LeafletControls />
+          </MapContainer>
           {selected && <article className="map-detail"><div className="detail-heading"><span className={`incident-icon severity-${selected.severity}`}>{getEmergencyIcon(selected.emergency_type)}</span><div><p className="panel-kicker">{selected.emergency_type}</p><h3>{selected.location}</h3></div><button type="button" onClick={() => setSelectedId(null)} aria-label="Close incident details">×</button></div><p>{selected.description}</p><div className="detail-meta"><span className={`status-badge status-${selected.status}`}>{STATUS_LABELS[selected.status] || selected.status}</span><span>Updated {formatTime(selected.updated_at || selected.created_at)}</span></div></article>}
           <div className="map-attribution">SafeSphere community reports · Kigali area</div>
         </div>
