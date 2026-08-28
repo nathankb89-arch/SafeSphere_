@@ -30,6 +30,7 @@ export default function Map() {
   const mapRef = useRef(null)
   const mapInstanceRef = useRef(null)
   const markersRef = useRef([])
+  const mapsLibrariesRef = useRef(null)
 
   const fetchEmergencies = async () => {
     setLoading(true)
@@ -57,20 +58,34 @@ export default function Map() {
   useEffect(() => {
     const apiKey = import.meta.env.VITE_GOOGLE_MAPS_API_KEY
     if (!apiKey) { setMapsStatus('missing-key'); return undefined }
-    if (window.google?.maps) { setMapsStatus('ready'); return undefined }
 
-    const script = document.createElement('script')
-    script.src = `https://maps.googleapis.com/maps/api/js?key=${encodeURIComponent(apiKey)}&libraries=marker&loading=async`
-    script.async = true
-    script.onload = () => setMapsStatus('ready')
-    script.onerror = () => setMapsStatus('error')
-    document.head.appendChild(script)
-    return () => { script.remove() }
+    let cancelled = false
+    const loadMaps = async () => {
+      try {
+        if (!window.google?.maps) {
+          await new Promise((resolve, reject) => {
+            const script = document.createElement('script')
+            script.src = `https://maps.googleapis.com/maps/api/js?key=${encodeURIComponent(apiKey)}&libraries=marker&loading=async`
+            script.async = true
+            script.onload = resolve
+            script.onerror = reject
+            document.head.appendChild(script)
+          })
+        }
+        const [mapsLibrary, markerLibrary] = await Promise.all([
+          window.google.maps.importLibrary('maps'),
+          window.google.maps.importLibrary('marker'),
+        ])
+        if (!cancelled) { mapsLibrariesRef.current = { Map: mapsLibrary.Map, AdvancedMarkerElement: markerLibrary.AdvancedMarkerElement }; setMapsStatus('ready') }
+      } catch { if (!cancelled) setMapsStatus('error') }
+    }
+    loadMaps()
+    return () => { cancelled = true }
   }, [])
 
   useEffect(() => {
-    if (mapsStatus !== 'ready' || !mapRef.current || !window.google?.maps) return
-    mapInstanceRef.current = new window.google.maps.Map(mapRef.current, {
+    if (mapsStatus !== 'ready' || !mapRef.current || !mapsLibrariesRef.current) return
+    mapInstanceRef.current = new mapsLibrariesRef.current.Map(mapRef.current, {
       center: KIGALI_CENTER,
       zoom: 13,
       mapId: import.meta.env.VITE_GOOGLE_MAPS_MAP_ID || undefined,
@@ -83,14 +98,14 @@ export default function Map() {
   }, [mapsStatus])
 
   useEffect(() => {
-    if (!mapInstanceRef.current || !window.google?.maps || !filteredEmergencies.length) return
+    if (!mapInstanceRef.current || !window.google?.maps || !mapsLibrariesRef.current?.AdvancedMarkerElement || !filteredEmergencies.length) return
     markersRef.current.forEach((marker) => { marker.map = null })
     markersRef.current = []
     const bounds = new window.google.maps.LatLngBounds()
     filteredEmergencies.forEach((emergency) => {
       if (emergency.latitude == null || emergency.longitude == null) return
       const position = { lat: Number(emergency.latitude), lng: Number(emergency.longitude) }
-      const marker = new window.google.maps.marker.AdvancedMarkerElement({ map: mapInstanceRef.current, position, title: emergency.location })
+      const marker = new mapsLibrariesRef.current.AdvancedMarkerElement({ map: mapInstanceRef.current, position, title: emergency.location })
       marker.addListener('click', () => setSelectedId(emergency.id))
       markersRef.current.push(marker)
       bounds.extend(position)
