@@ -46,6 +46,12 @@ export default function Map() {
     }
   }
 
+  const filteredEmergencies = useMemo(() => emergencies.filter((emergency) => {
+    const matchesSeverity = severity === 'all' || emergency.severity === severity
+    const haystack = `${emergency.location} ${emergency.emergency_type} ${emergency.description}`.toLowerCase()
+    return matchesSeverity && haystack.includes(query.toLowerCase())
+  }), [emergencies, query, severity])
+
   useEffect(() => { fetchEmergencies() }, [])
 
   useEffect(() => {
@@ -93,12 +99,6 @@ export default function Map() {
     else if (markersRef.current.length === 1) { mapInstanceRef.current.setCenter(markersRef.current[0].position); mapInstanceRef.current.setZoom(14) }
     return () => { markersRef.current.forEach((marker) => { marker.map = null }); markersRef.current = [] }
   }, [filteredEmergencies])
-
-  const filteredEmergencies = useMemo(() => emergencies.filter((emergency) => {
-    const matchesSeverity = severity === 'all' || emergency.severity === severity
-    const haystack = `${emergency.location} ${emergency.emergency_type} ${emergency.description}`.toLowerCase()
-    return matchesSeverity && haystack.includes(query.toLowerCase())
-  }), [emergencies, query, severity])
 
   const selected = filteredEmergencies.find((emergency) => emergency.id === selectedId) ?? filteredEmergencies[0]
   const coordinateCount = filteredEmergencies.filter((emergency) => emergency.latitude != null && emergency.longitude != null).length
