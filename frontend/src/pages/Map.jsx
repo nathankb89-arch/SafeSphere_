@@ -133,7 +133,6 @@ export default function Map() {
             <LeafletIncidentLayer emergencies={filteredEmergencies} onSelect={setSelectedId} />
             <LeafletControls />
           </MapContainer>
-          {selected && <article className="map-detail"><div className="detail-heading"><span className={`incident-icon severity-${selected.severity}`}>{getEmergencyIcon(selected.emergency_type)}</span><div><p className="panel-kicker">{selected.emergency_type}</p><h3>{selected.location}</h3></div><button type="button" onClick={() => setSelectedId(null)} aria-label="Close incident details">×</button></div><p>{selected.description}</p><div className="detail-meta"><span className={`status-badge status-${selected.status}`}>{STATUS_LABELS[selected.status] || selected.status}</span><span>Updated {formatTime(selected.updated_at || selected.created_at)}</span></div></article>}
           <div className="map-attribution">SafeSphere community reports · Kigali area</div>
         </div>
       </section>
