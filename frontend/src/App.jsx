@@ -16,6 +16,7 @@ import EmergencyEducation from './pages/EmergencyEducation'
 import Profile from './pages/Profile'
 import Professionals from './pages/Professionals'
 import FirstAid from './pages/FirstAid'
+import Map from './pages/Map'
 
 export default function App() {
   return (
@@ -27,6 +28,7 @@ export default function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/report" element={<ReportEmergency />} />
+          <Route path="/map" element={<Map />} />
           <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
           <Route path="/profile" element={<ProtectedRoute><Profile /></ProtectedRoute>} />
           <Route path="/about" element={<About />} />

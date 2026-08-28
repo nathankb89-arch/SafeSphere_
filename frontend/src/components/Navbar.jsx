@@ -37,6 +37,7 @@ export default function Navbar() {
         <div className="hidden items-center gap-6 text-sm text-slate-200 lg:flex">
           {[
             ['/report', 'Report'],
+            ['/map', 'Live map'],
             ['/education', 'Education'],
             ['/professionals', 'Professionals'],
             ['/how-it-works', 'How it works'],
