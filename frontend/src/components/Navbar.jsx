@@ -38,6 +38,7 @@ export default function Navbar() {
           {[
             ['/report', 'Report'],
             ['/map', 'Live map'],
+            ['/responder-management', 'Responder management'],
             ['/education', 'Education'],
             ['/professionals', 'Professionals'],
           ].map(([to, label]) => (
