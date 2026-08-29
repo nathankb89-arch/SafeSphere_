@@ -16,9 +16,13 @@ class EmergencyViewSet(viewsets.ModelViewSet):
 
     def get_queryset(self):
         user = self.request.user
+        if not user or not user.is_authenticated:
+            return Emergency.objects.none()
+
         if user.is_staff or user.role in ['admin', 'ngo', 'volunteer']:
             return Emergency.objects.all()
-        return Emergency.objects.filter(reporter=user)
+
+        return Emergency.objects.exclude(status=Emergency.Status.RESOLVED)
 
     def perform_create(self, serializer):
         serializer.save(reporter=self.request.user)
