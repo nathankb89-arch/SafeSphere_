@@ -40,8 +40,6 @@ export default function Navbar() {
             ['/map', 'Live map'],
             ['/education', 'Education'],
             ['/professionals', 'Professionals'],
-            ['/how-it-works', 'How it works'],
-            ['/safety-tips', 'Safety tips'],
           ].map(([to, label]) => (
             <NavLink
               key={to}
@@ -84,6 +82,8 @@ export default function Navbar() {
                 <NavLink key={to} to={to} onClick={closeAndNavigate} className="block rounded-xl px-3 py-2.5 text-sm font-semibold transition hover:bg-red-50 hover:text-red-700 dark:hover:bg-red-950/40 dark:hover:text-red-300" role="menuitem">{label}</NavLink>
               ))}
               <div className="my-2 border-t border-slate-200 dark:border-slate-700" />
+              <NavLink to="/how-it-works" onClick={closeAndNavigate} className="block rounded-xl px-3 py-2.5 text-sm transition hover:bg-slate-100 dark:hover:bg-slate-800" role="menuitem">How it works</NavLink>
+              <NavLink to="/safety-tips" onClick={closeAndNavigate} className="block rounded-xl px-3 py-2.5 text-sm transition hover:bg-slate-100 dark:hover:bg-slate-800" role="menuitem">Safety tips</NavLink>
               <NavLink to="/faq" onClick={closeAndNavigate} className="block rounded-xl px-3 py-2.5 text-sm transition hover:bg-slate-100 dark:hover:bg-slate-800" role="menuitem">FAQ & support</NavLink>
               <NavLink to="/about" onClick={closeAndNavigate} className="block rounded-xl px-3 py-2.5 text-sm transition hover:bg-slate-100 dark:hover:bg-slate-800" role="menuitem">About SafeSphere</NavLink>
               <NavLink to="/first-aid" onClick={closeAndNavigate} className="block rounded-xl px-3 py-2.5 text-sm transition hover:bg-slate-100 dark:hover:bg-slate-800" role="menuitem">First-aid education</NavLink>
