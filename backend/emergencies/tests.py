@@ -29,7 +29,8 @@ class EmergencyViewSetVisibilityTests(TestCase):
         request.user = self.user
 
         view = EmergencyViewSet()
-        queryset = view.get_queryset(request)
+        view.request = request
+        queryset = view.get_queryset()
 
         self.assertEqual(queryset.count(), 1)
         self.assertEqual(queryset.first().reporter, self.other_user)
