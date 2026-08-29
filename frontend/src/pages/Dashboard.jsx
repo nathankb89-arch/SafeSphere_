@@ -266,8 +266,8 @@ export default function Dashboard() {
                 <p className="eyebrow">Live map</p>
                 <h2 className="text-lg font-bold text-slate-900 dark:text-white">Incident coverage</h2>
               </div>
-              <div className="h-72">
-                <MapContainer center={KIGALI_CENTER} zoom={12} scrollWheelZoom className="h-full w-full" aria-label="Emergency map">
+              <div className="relative z-0 h-72">
+                <MapContainer center={KIGALI_CENTER} zoom={12} scrollWheelZoom className="h-full w-full" style={{ zIndex: 0 }} aria-label="Emergency map">
                   <TileLayer attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors' url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
                   <DispatchMapLayer emergencies={visibleEmergencies} selectedId={selectedEmergency?.id ?? null} onSelect={setSelectedId} />
                 </MapContainer>

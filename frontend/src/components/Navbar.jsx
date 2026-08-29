@@ -24,7 +24,7 @@ export default function Navbar() {
     : [['/login', 'Log in'], ['/register', 'Create account']]
 
   return (
-    <header className="sticky top-0 z-50 border-b border-slate-200/80 bg-slate-950/95 text-white backdrop-blur-md dark:border-slate-700 dark:bg-slate-950/90">
+    <header className="sticky top-0 z-[60] border-b border-slate-200/80 bg-slate-950/95 text-white backdrop-blur-md dark:border-slate-700 dark:bg-slate-950/90">
       <nav className="mx-auto flex max-w-7xl items-center justify-between gap-2 px-3 py-3 sm:gap-4 sm:px-6 lg:px-8">
         <Link to="/" className="flex items-center gap-3" aria-label="SafeSphere home">
           <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-red-600 font-black text-white shadow-lg shadow-red-600/30">S</span>
@@ -73,7 +73,7 @@ export default function Navbar() {
           </button>
 
           {menuOpen && (
-            <div className="absolute right-0 top-12 z-50 w-64 overflow-hidden rounded-2xl border border-slate-200 bg-white p-2 text-slate-700 shadow-2xl dark:border-slate-700 dark:bg-slate-900 dark:text-slate-200" role="menu">
+            <div className="absolute right-0 top-12 z-[1000] w-64 overflow-hidden rounded-2xl border border-slate-200 bg-white p-2 text-slate-700 shadow-2xl dark:border-slate-700 dark:bg-slate-900 dark:text-slate-200" role="menu">
               <div className="border-b border-slate-200 px-3 py-3 dark:border-slate-700">
                 <p className="text-xs font-bold uppercase tracking-[0.16em] text-red-600 dark:text-red-400">{user ? 'Your SafeSphere' : 'SafeSphere menu'}</p>
                 <p className="mt-1 truncate text-sm text-slate-500 dark:text-slate-400">{user ? user.username : 'Emergency help and preferences'}</p>
