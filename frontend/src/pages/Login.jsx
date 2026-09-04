@@ -7,7 +7,9 @@ export default function Login() {
   const [form, setForm] = useState({ username: '', password: '' }); const [error, setError] = useState('')
   const handleSubmit = async (event) => {
     event.preventDefault(); setError('')
-    try { await login(form.username, form.password); navigate('/dashboard') } catch { setError('Invalid username or password.') }
+    try { await login(form.username, form.password); navigate('/dashboard') } catch (err) {
+      setError(!err.response ? 'Cannot reach SafeSphere. Start the backend server and try again.' : 'Invalid username or password.')
+    }
   }
   return (
     <main className="page-shell py-12">

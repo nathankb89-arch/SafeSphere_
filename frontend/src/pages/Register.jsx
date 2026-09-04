@@ -10,7 +10,11 @@ export default function Register() {
   const handleChange = (event) => setForm({ ...form, [event.target.name]: event.target.value })
   const handleSubmit = async (event) => {
     event.preventDefault(); setError('')
-    try { await register(form); navigate('/dashboard') } catch (err) { setError(err.response?.data?.password?.[0] || 'Registration failed. Check your details.') }
+    try { await register(form); navigate('/dashboard') } catch (err) {
+      const response = err.response?.data
+      const firstError = response && Object.values(response).flat().find(Boolean)
+      setError(firstError || (!err.response ? 'Cannot reach SafeSphere. Start the backend server and try again.' : 'Registration failed. Check your details.'))
+    }
   }
   return (
     <main className="page-shell py-12">
