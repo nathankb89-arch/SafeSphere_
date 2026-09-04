@@ -53,6 +53,7 @@ export default function CommandCenter() {
   const [radarOn, setRadarOn] = useState(true)
   const [assignments, setAssignments] = useState({})
   const [notice, setNotice] = useState('')
+  const [lastSynced, setLastSynced] = useState(null)
 
   const fetchIncidents = async () => {
     setLoading(true)
@@ -66,10 +67,15 @@ export default function CommandCenter() {
       setDemoMode(true)
     } finally {
       setLoading(false)
+      setLastSynced(new Date())
     }
   }
 
   useEffect(() => { fetchIncidents() }, [])
+  useEffect(() => {
+    const refreshTimer = setInterval(fetchIncidents, 30000)
+    return () => clearInterval(refreshTimer)
+  }, [])
 
   const visibleIncidents = useMemo(() => incidents.filter((incident) => {
     const matchesSeverity = severity === 'all' || incident.severity === severity
@@ -142,7 +148,7 @@ export default function CommandCenter() {
             <TileLayer attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors' url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
             <IncidentMarkers incidents={visibleIncidents} selectedId={selected?.id} onSelect={setSelectedId} />
           </MapContainer>
-          <div className="map-topline"><span className="live-dot" />Radar scanning · Kigali area</div>
+          <div className="map-topline"><span className="live-dot" />Radar scanning · Kigali area {lastSynced && <small>· synced {lastSynced.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</small>}</div>
           <button type="button" className={`radar-toggle ${radarOn ? 'active' : ''}`} onClick={() => setRadarOn((value) => !value)}>{radarOn ? 'Radar on' : 'Radar off'}</button>
         </div>
 
