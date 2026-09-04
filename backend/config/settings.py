@@ -89,11 +89,7 @@ USE_REMOTE_DATABASE = config('USE_REMOTE_DATABASE', default=not DEBUG, cast=bool
 DATABASE_URL = config('DATABASE_URL', default=LOCAL_DATABASE_URL) if USE_REMOTE_DATABASE else LOCAL_DATABASE_URL
 
 DATABASES = {
-    'default': dj_database_url.config(
-        url=DATABASE_URL,
-        default=LOCAL_DATABASE_URL,
-        conn_max_age=600
-    )
+    'default': dj_database_url.parse(DATABASE_URL, conn_max_age=600)
 }
 
 
