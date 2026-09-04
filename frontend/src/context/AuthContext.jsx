@@ -14,10 +14,16 @@ export function AuthProvider({ children }) {
     localStorage.setItem('access_token', data.access)
     localStorage.setItem('refresh_token', data.refresh)
 
-    const { data: profile } = await api.get('/auth/profile/')
-    localStorage.setItem('user', JSON.stringify(profile))
-    setUser(profile)
-    return profile
+    try {
+      const { data: profile } = await api.get('/auth/profile/')
+      localStorage.setItem('user', JSON.stringify(profile))
+      setUser(profile)
+      return profile
+    } catch (error) {
+      localStorage.removeItem('access_token')
+      localStorage.removeItem('refresh_token')
+      throw error
+    }
   }
 
   const register = async (formData) => {
