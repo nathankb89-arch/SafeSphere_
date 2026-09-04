@@ -167,9 +167,11 @@ SECRET_KEY=replace-with-a-secure-secret
 DEBUG=True
 ALLOWED_HOSTS=localhost,127.0.0.1
 DATABASE_URL=sqlite:///db.sqlite3
+# Optional: set true only when local development should use DATABASE_URL
+USE_REMOTE_DATABASE=False
 ```
 
-For deployment, set `DEBUG=False` and provide the real hostnames in `ALLOWED_HOSTS`, separated by commas. The settings provide `localhost,127.0.0.1` as a local fallback when the value is missing or blank; they do not replace the need to configure production hosts.
+For local development, SQLite is selected by default even if an old remote `DATABASE_URL` is present. Set `USE_REMOTE_DATABASE=True` to connect to that URL intentionally. For deployment, set `DEBUG=False` and provide the real database URL and hostnames in `ALLOWED_HOSTS`, separated by commas. The settings provide `localhost,127.0.0.1` as a local fallback when the value is missing or blank; they do not replace the need to configure production hosts.
 
 Never commit production secrets or credentials to the repository.
 

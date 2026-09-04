@@ -84,10 +84,14 @@ TEMPLATES = [
 WSGI_APPLICATION = 'config.wsgi.application'
 
 # --- Database ---
+LOCAL_DATABASE_URL = f"sqlite:///{os.path.join(BASE_DIR, 'db.sqlite3')}"
+USE_REMOTE_DATABASE = config('USE_REMOTE_DATABASE', default=not DEBUG, cast=bool)
+DATABASE_URL = config('DATABASE_URL', default=LOCAL_DATABASE_URL) if USE_REMOTE_DATABASE else LOCAL_DATABASE_URL
+
 DATABASES = {
     'default': dj_database_url.config(
-        # Fallback to local SQLite if DATABASE_URL environment variable is missing
-        default=f"sqlite:///{os.path.join(BASE_DIR, 'db.sqlite3')}",
+        url=DATABASE_URL,
+        default=LOCAL_DATABASE_URL,
         conn_max_age=600
     )
 }
