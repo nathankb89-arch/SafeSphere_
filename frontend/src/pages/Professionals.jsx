@@ -78,7 +78,13 @@ export default function Professionals() {
         <div className="mt-8 grid gap-5 md:grid-cols-2 xl:grid-cols-3">
           {visibleProfessionals.map((professional) => (
             <article key={professional.name} className="info-card overflow-hidden p-0">
-              <img src={professional.image} alt="" className="h-56 w-full object-cover" />
+              <img
+                src={professional.image}
+                alt={`${professional.name}, ${professional.role}`}
+                loading="lazy"
+                decoding="async"
+                className="h-56 w-full object-cover object-center"
+              />
               <div className="p-5">
                 <span className={`status-badge ${professional.accent}`}>{professional.category}</span>
                 <h2 className="mt-4 text-xl font-bold text-slate-900 dark:text-white">{professional.name}</h2>

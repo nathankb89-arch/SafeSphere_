@@ -4,14 +4,14 @@ import { useAuth } from '../context/AuthContext'
 import api from '../services/api'
 
 const EMERGENCY_TYPES = [
-  { value: 'fire', label: 'Fire', icon: '🔥' },
-  { value: 'medical', label: 'Medical', icon: '🩺' },
-  { value: 'accident', label: 'Accident', icon: '🚗' },
-  { value: 'flood', label: 'Flood', icon: '🌊' },
-  { value: 'landslide', label: 'Landslide', icon: '⛰️' },
-  { value: 'earthquake', label: 'Earthquake', icon: '🏚️' },
-  { value: 'outbreak', label: 'Outbreak', icon: '⚠️' },
-  { value: 'other', label: 'Other', icon: '📣' },
+  { value: 'fire', label: 'Fire'  },
+  { value: 'medical', label: 'Medical' },
+  { value: 'accident', label: 'Accident' },
+  { value: 'flood', label: 'Flood' },
+  { value: 'landslide', label: 'Landslide',  },
+  { value: 'earthquake', label: 'Earthquake'},
+  { value: 'outbreak', label: 'Outbreak'},
+  { value: 'other', label: 'Other'},
 ]
 
 const SEVERITIES = ['low', 'medium', 'high', 'critical']
