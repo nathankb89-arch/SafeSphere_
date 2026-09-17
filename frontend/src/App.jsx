@@ -32,8 +32,8 @@ export default function App() {
           <Route path="/report" element={<ReportEmergency />} />
           <Route path="/map" element={<Map />} />
           <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
-          <Route path="/command-center" element={<ProtectedRoute><CommandCenter /></ProtectedRoute>} />
-          <Route path="/responder-management" element={<ProtectedRoute><ResponderManagement /></ProtectedRoute>} />
+          <Route path="/command-center" element={<ProtectedRoute allowedRoles={['ngo']}><CommandCenter /></ProtectedRoute>} />
+          <Route path="/responder-management" element={<ProtectedRoute allowedRoles={['ngo']}><ResponderManagement /></ProtectedRoute>} />
           <Route path="/profile" element={<ProtectedRoute><Profile /></ProtectedRoute>} />
           <Route path="/about" element={<About />} />
           <Route path="/how-it-works" element={<HowItWorks />} />

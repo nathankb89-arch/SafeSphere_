@@ -19,6 +19,10 @@ export default function Navbar() {
   }, [])
 
   const closeAndNavigate = () => setMenuOpen(false)
+  const isNgoStaff = user?.role === 'ngo'
+  const operationsLinks = isNgoStaff
+    ? [['/command-center', 'Command center'], ['/responder-management', 'Responder management']]
+    : []
   const menuLinks = user
     ? [['/profile', 'Profile'], ['/dashboard', 'Dashboard']]
     : [['/login', 'Log in'], ['/register', 'Create account']]
@@ -38,8 +42,7 @@ export default function Navbar() {
           {[
             ['/report', 'Report'],
             ['/map', 'Live map'],
-            ['/command-center', 'Command center'],
-            ['/responder-management', 'Responder management'],
+            ...operationsLinks,
             ['/education', 'Education'],
             ['/professionals', 'Professionals'],
           ].map(([to, label]) => (
