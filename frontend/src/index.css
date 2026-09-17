@@ -96,11 +96,11 @@ html.dark .page-shell {
   color: var(--brand-red-dark);
 }
 
-.eyebrow-light {
-  color: #ffffff;
+.eyebrow-cta {
+  color: var(--brand-red-dark);
 }
 
-html.dark .eyebrow-light {
+html.dark .eyebrow-cta {
   color: #f1f5f9;
 }
 
@@ -248,10 +248,28 @@ html.dark .select {
   justify-content: space-between;
   gap: 1rem;
   flex-wrap: wrap;
-  background: linear-gradient(135deg, #111827 0%, #7f1d1d 100%);
+  background: linear-gradient(135deg, #ffffff 0%, #f1f5f9 100%);
   border-radius: 2rem;
   padding: 2rem;
-  border: 1px solid rgba(255,255,255,0.08);
+  border: 1px solid var(--border);
+}
+
+html.dark .cta-banner {
+  background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+}
+
+.cta-title {
+  color: var(--text);
+}
+
+.cta-banner .primary-btn.white {
+  background: var(--brand-red);
+  color: #ffffff;
+}
+
+html.dark .cta-banner .primary-btn.white {
+  background: #ffffff;
+  color: #0f172a;
 }
 
 @media (max-width: 640px) {
