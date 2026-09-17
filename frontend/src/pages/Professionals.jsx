@@ -106,7 +106,7 @@ export default function Professionals() {
       <section className="container pb-16">
         <div className="cta-banner">
           <div>
-            <p className="eyebrow text-white dark:text-slate-100">Learn first</p>
+            <p className="eyebrow eyebrow-light">Learn first</p>
             <h2 className="section-title small text-white">Build confidence before an emergency happens.</h2>
           </div>
           <Link to="/first-aid" className="primary-btn white">Explore first aid</Link>

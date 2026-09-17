@@ -96,6 +96,14 @@ html.dark .page-shell {
   color: var(--brand-red-dark);
 }
 
+.eyebrow-light {
+  color: #ffffff;
+}
+
+html.dark .eyebrow-light {
+  color: #f1f5f9;
+}
+
 .section-headings {
   display: flex;
   align-items: end;
