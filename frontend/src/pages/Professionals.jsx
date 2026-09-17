@@ -7,7 +7,8 @@ const PROFESSIONALS = [
     role: 'Emergency medicine',
     category: 'Medical',
     description: 'Demonstration profile for emergency care education and community preparedness.',
-    image: 'https://images.unsplash.com/photo-1531123897727-8f129e1688ce?auto=format&fit=crop&w=500&q=80',
+    image: 'https://images.unsplash.com/photo-1559839734-2b71ea197ec2?auto=format&fit=crop&w=700&q=85',
+    imagePosition: 'object-center',
     accent: 'status-blue',
   },
   {
@@ -15,7 +16,8 @@ const PROFESSIONALS = [
     role: 'Fire and rescue specialist',
     category: 'Fire & rescue',
     description: 'Demonstration profile for fire prevention, evacuation planning, and rescue awareness.',
-    image: 'https://images.unsplash.com/photo-1531384441138-2736e62e0919?auto=format&fit=crop&w=500&q=80',
+    image: 'https://images.unsplash.com/photo-1581141849291-1125c7f692d5?auto=format&fit=crop&w=700&q=85',
+    imagePosition: 'object-center',
     accent: 'status-red',
   },
   {
@@ -23,7 +25,8 @@ const PROFESSIONALS = [
     role: 'First-aid instructor',
     category: 'First aid',
     description: 'Demonstration profile for basic first-aid learning and community training resources.',
-    image: 'https://images.unsplash.com/photo-1542909168-82c3e7fdca5c?auto=format&fit=crop&w=500&q=80',
+    image: 'https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=700&q=85',
+    imagePosition: 'object-center',
     accent: 'status-green',
   },
   {
@@ -31,7 +34,8 @@ const PROFESSIONALS = [
     role: 'Search and rescue coordinator',
     category: 'Search & rescue',
     description: 'Demonstration profile for preparedness, missing-person response, and rescue coordination.',
-    image: 'https://images.unsplash.com/photo-1504593811423-6dd665756598?auto=format&fit=crop&w=500&q=80',
+    image: 'https://images.unsplash.com/photo-1551632811-561732d1e306?auto=format&fit=crop&w=700&q=85',
+    imagePosition: 'object-center',
     accent: 'status-amber',
   },
   {
@@ -39,7 +43,8 @@ const PROFESSIONALS = [
     role: 'Mental health professional',
     category: 'Mental health',
     description: 'Demonstration profile for crisis support education and compassionate referral guidance.',
-    image: 'https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=500&q=80',
+    image: 'https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&w=700&q=85',
+    imagePosition: 'object-center',
     accent: 'status-purple',
   },
   {
@@ -47,7 +52,8 @@ const PROFESSIONALS = [
     role: 'Disaster preparedness advisor',
     category: 'Preparedness',
     description: 'Demonstration profile for household readiness, hazards, and community response planning.',
-    image: 'https://images.unsplash.com/photo-1519345182560-3f2917c472ef?auto=format&fit=crop&w=500&q=80',
+    image: 'https://images.unsplash.com/photo-1556761175-b413da4baf72?auto=format&fit=crop&w=700&q=85',
+    imagePosition: 'object-center',
     accent: 'status-amber',
   },
 ]
@@ -83,7 +89,7 @@ export default function Professionals() {
                 alt={`${professional.name}, ${professional.role}`}
                 loading="lazy"
                 decoding="async"
-                className="h-56 w-full object-cover object-center"
+                className={`h-56 w-full object-cover ${professional.imagePosition}`}
               />
               <div className="p-5">
                 <span className={`status-badge ${professional.accent}`}>{professional.category}</span>
