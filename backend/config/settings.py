@@ -95,7 +95,7 @@ WSGI_APPLICATION = 'config.wsgi.application'
 
 # --- Database ---
 LOCAL_DATABASE_URL = f"sqlite:///{os.path.join(BASE_DIR, 'db.sqlite3')}"
-USE_REMOTE_DATABASE = config_bool('USE_REMOTE_DATABASE', default=not DEBUG)
+USE_REMOTE_DATABASE = config_bool('USE_REMOTE_DATABASE', default=False)
 DATABASE_URL = config('DATABASE_URL', default=LOCAL_DATABASE_URL) if USE_REMOTE_DATABASE else LOCAL_DATABASE_URL
 
 if USE_REMOTE_DATABASE:
