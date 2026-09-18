@@ -69,14 +69,20 @@ select {
 }
 
 .page-shell {
+  position: relative;
+  isolation: isolate;
   min-height: calc(100vh - 170px);
   background:
+    linear-gradient(rgba(248, 250, 252, 0.7), rgba(248, 250, 252, 0.78)),
+    url('https://images.unsplash.com/photo-1581141849291-1125c7f692d5?auto=format&fit=crop&w=2000&q=75') center / cover fixed,
     radial-gradient(circle at top left, rgba(239, 68, 68, 0.08), transparent 25%),
     linear-gradient(180deg, var(--page-bg) 0%, rgba(248, 250, 252, 0.95) 100%);
 }
 
 html.dark .page-shell {
   background:
+    linear-gradient(rgba(2, 8, 23, 0.68), rgba(15, 23, 42, 0.78)),
+    url('https://images.unsplash.com/photo-1581141849291-1125c7f692d5?auto=format&fit=crop&w=2000&q=75') center / cover fixed,
     radial-gradient(circle at top left, rgba(239, 68, 68, 0.14), transparent 25%),
     linear-gradient(180deg, var(--page-bg) 0%, rgba(15, 23, 42, 0.95) 100%);
 }

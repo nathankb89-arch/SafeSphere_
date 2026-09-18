@@ -175,6 +175,30 @@ For local development, SQLite is selected by default even if an old remote `DATA
 
 Never commit production secrets or credentials to the repository.
 
+## Deployment
+
+The repository includes deployment manifests for a split deployment:
+
+- `render.yaml` deploys the Django API and provisions a PostgreSQL database on Render.
+- `vercel.json` builds the Vite frontend from `frontend/` and enables SPA route fallback.
+
+### Render API
+
+1. Create a new Blueprint on Render from this repository and select `render.yaml`.
+2. Set `CORS_ALLOWED_ORIGINS` to the final Vercel URL, such as `https://your-app.vercel.app`.
+3. Set `CSRF_TRUSTED_ORIGINS` to the same HTTPS frontend URL.
+4. Add Cloudinary credentials if uploaded evidence and organization media should persist. Without them, uploads use the local filesystem and will not survive a Render instance replacement.
+5. Confirm the deployed health endpoint returns `{"status":"ok"}` at `/api/health/`.
+
+### Vercel frontend
+
+1. Import the repository into Vercel.
+2. Keep the repository root as the project root; `vercel.json` already points the install and build commands at `frontend/`.
+3. Set `VITE_API_URL` to the Render API base URL, such as `https://your-api.onrender.com/api`.
+4. Deploy, then copy the final Vercel URL back into Render's `CORS_ALLOWED_ORIGINS` and `CSRF_TRUSTED_ORIGINS` values.
+
+The frontend build and backend production checks can be run locally with `npm run build` from the repository root and `python manage.py check` plus `python manage.py collectstatic --noinput` from `backend/`.
+
 ## Safety and Data Limitations
 
 - Life-threatening situations should be directed to local emergency services immediately.
