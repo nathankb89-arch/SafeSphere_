@@ -89,9 +89,17 @@ LOCAL_DATABASE_URL = f"sqlite:///{os.path.join(BASE_DIR, 'db.sqlite3')}"
 USE_REMOTE_DATABASE = config('USE_REMOTE_DATABASE', default=not DEBUG, cast=bool)
 DATABASE_URL = config('DATABASE_URL', default=LOCAL_DATABASE_URL) if USE_REMOTE_DATABASE else LOCAL_DATABASE_URL
 
-DATABASES = {
-    'default': dj_database_url.parse(DATABASE_URL, conn_max_age=600)
-}
+if USE_REMOTE_DATABASE:
+    DATABASES = {
+        'default': dj_database_url.parse(DATABASE_URL, conn_max_age=600)
+    }
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3',
+        }
+    }
 
 
 # --- Custom user model (defined in Step 3) ---
