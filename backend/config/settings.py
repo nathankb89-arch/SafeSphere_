@@ -20,7 +20,16 @@ import os
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = config('SECRET_KEY')
-DEBUG = config('DEBUG', default=False, cast=bool)
+
+
+def config_bool(name, default=False):
+    value = config(name, default=None)
+    if value is None:
+        return default
+    return str(value).strip().lower() in {'1', 'true', 'yes', 'on'}
+
+
+DEBUG = config_bool('DEBUG')
 allowed_hosts_str = config('ALLOWED_HOSTS', default='localhost,127.0.0.1').strip()
 if not allowed_hosts_str:
     allowed_hosts_str = 'localhost,127.0.0.1'
@@ -86,7 +95,7 @@ WSGI_APPLICATION = 'config.wsgi.application'
 
 # --- Database ---
 LOCAL_DATABASE_URL = f"sqlite:///{os.path.join(BASE_DIR, 'db.sqlite3')}"
-USE_REMOTE_DATABASE = config('USE_REMOTE_DATABASE', default=not DEBUG, cast=bool)
+USE_REMOTE_DATABASE = config_bool('USE_REMOTE_DATABASE', default=not DEBUG)
 DATABASE_URL = config('DATABASE_URL', default=LOCAL_DATABASE_URL) if USE_REMOTE_DATABASE else LOCAL_DATABASE_URL
 
 if USE_REMOTE_DATABASE:
