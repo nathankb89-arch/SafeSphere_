@@ -120,13 +120,21 @@ CORS_ALLOWED_ORIGINS = [origin.strip() for origin in cors_origins.split(',') if 
 csrf_origins = config('CSRF_TRUSTED_ORIGINS', default='').strip()
 CSRF_TRUSTED_ORIGINS = [origin.strip() for origin in csrf_origins.split(',') if origin.strip()]
 
-# --- Cloudinary (image storage for emergency evidence photos) ---
-# cloudinary.config(
-#     cloud_name=config('CLOUDINARY_CLOUD_NAME'),
-#     api_key=config('CLOUDINARY_API_KEY'),
-#     api_secret=config('CLOUDINARY_API_SECRET'),
-# )
-DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+# --- Media storage ---
+cloudinary_credentials = all([
+    config('CLOUDINARY_CLOUD_NAME', default=''),
+    config('CLOUDINARY_API_KEY', default=''),
+    config('CLOUDINARY_API_SECRET', default=''),
+])
+if cloudinary_credentials:
+    cloudinary.config(
+        cloud_name=config('CLOUDINARY_CLOUD_NAME'),
+        api_key=config('CLOUDINARY_API_KEY'),
+        api_secret=config('CLOUDINARY_API_SECRET'),
+    )
+    DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+else:
+    MEDIA_ROOT = BASE_DIR / 'media'
 
 STATIC_URL = '/static/'
 STATIC_ROOT = BASE_DIR / 'staticfiles'
